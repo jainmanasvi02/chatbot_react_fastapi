@@ -1,0 +1,91 @@
+body, html {
+  background: linear-gradient(135deg, #6561af, #c2d0d4); 
+}
+
+.chat-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: #fafafa;
+}
+
+.chat-box {
+  height: 300px;
+  overflow-y: scroll;
+  border: 1px solid #ac9b9b;
+  padding: 10px;
+  margin-bottom: 1rem;
+}
+
+
+.user {
+  text-align: right;
+  margin: 0.5rem 0;
+  color: rgb(13, 24, 124);
+}
+
+.bot {
+  text-align: justify;
+  margin: 0.5rem 0;
+  color: rgb(4, 5, 4);
+}
+
+.input-area {
+  display: flex;
+  gap: 10px;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #3f51b5;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.logout-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: auto;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.bot p {
+  margin: 8px 0;
+}
+
+.bot ul {
+  margin-left: 20px;
+  padding-left: 15px;
+}
+
+.bot li {
+  margin-bottom: 4px;
+}
+
+.bot strong {
+  font-weight: bold;
+}
+
+
