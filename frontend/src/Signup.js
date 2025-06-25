@@ -50,7 +50,7 @@ function Signup() {
               style={styles.input}
             />
           </div>
-          <button type="submit" style={styles.button}>Signin</button>
+          <button type="submit" style={styles.button}>SignUp</button>
         </form>
       </div>
     </div>

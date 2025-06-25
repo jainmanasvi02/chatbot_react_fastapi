@@ -1,5 +1,5 @@
 body, html {
-  background: linear-gradient(135deg, #6561af, #c2d0d4); 
+  background: linear-gradient(135deg, #5fb95c, #4c974c); 
 }
 
 .chat-container {
@@ -12,24 +12,28 @@ body, html {
 }
 
 .chat-box {
+  display: flex;
   height: 300px;
   overflow-y: scroll;
   border: 1px solid #ac9b9b;
   padding: 10px;
   margin-bottom: 1rem;
+  flex-direction: column;
 }
 
 
 .user {
   text-align: right;
   margin: 0.5rem 0;
-  color: rgb(13, 24, 124);
+  color: rgb(14, 25, 126);
+  display: inline-block;
 }
 
 .bot {
   text-align: justify;
   margin: 0.5rem 0;
   color: rgb(4, 5, 4);
+  display: inline-block;
 }
 
 .input-area {
@@ -89,3 +93,99 @@ button {
 }
 
 
+.main-landing {
+  /*height: 100vh;*/
+  z-index: 2;
+  background: linear-gradient(135deg, #65e04c, #4dbe4b);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-box {
+  background: white;
+  padding: 55px 50px;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+  z-index: 2;
+  width: 90%;
+}
+
+.main-heading {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  color: #02b902;
+}
+
+.main-subtitle {
+  font-size: 1.5rem;
+  color: #444;
+  margin-bottom: 30px;
+}
+
+.main-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.main-btn {
+  padding: 20px 30px;
+  border-radius: 999px;
+  border: none;
+  background-color: #00d41c;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.main-btn:hover {
+  background-color: #00a60e;
+}
+
+.main-btn.outline {
+  background-color: white;
+  color: #43c443;
+  border: 2px solid #07d400;
+}
+
+.main-btn.outline:hover {
+  background-color: #e6f0fa;
+}
+
+.main-bg-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #ffffff;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-bg-shape {
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  background: #43c443;
+  border-radius: 50%;
+  top: -50%;
+  left: -50%;
+  transform: rotate(30deg);
+  z-index: 0;
+}
+
+.second-shape {
+  top: auto;
+  bottom: -30%;
+  right: -30%;
+  left: auto;
+  transform: rotate(-20deg);
+  background: #50bd4c;
+  opacity: 0.9;
+}
