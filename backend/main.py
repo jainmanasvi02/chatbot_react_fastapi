@@ -1,10 +1,13 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from .database import SessionLocal, engine, Base
 from . import models, schemas, crud, llm_provider
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.future import select
+from fastapi.responses import JSONResponse
+from backend.logger import logger
+import traceback
 
 app = FastAPI()
 
@@ -73,6 +76,15 @@ async def signin(user: schemas.UserLogin, db: AsyncSession = Depends(get_db)):
     print("Login successfull")
     return {"message": "Login successful", "username": db_user.username}
 
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    stack_trace = traceback.format_exc()
+    logger.error(f"Unhandled error at {request.url}\n{stack_trace}")
+    return JSONResponse(
+        status_code=500,
+        content={"detail": "Internal server error. Please try again later."}
+    )
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
