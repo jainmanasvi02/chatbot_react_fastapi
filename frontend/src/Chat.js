@@ -11,9 +11,13 @@ export default function Chat() {
   const [chatHistory, setChatHistory] = useState([]);
   const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {   
     const token = localStorage.getItem('token');
     const email = localStorage.getItem('email');
+    console.log("EMAIL:", email, "TOKEN:", token);
+
     if (!token || !email) {
       navigate('/signin');
       return;
@@ -28,8 +32,11 @@ export default function Chat() {
         }));
         setChatHistory(history);
       })
-      .catch(err => console.error('Error fetching history:', err));
+      .catch(err => console.error('Error fetching history:', err))
+      .finally(() => setLoading(false));
   }, [navigate]);
+
+  if (loading) return <div>Loading chat...</div>;
 
   const sendMessage = async () => {
     if (!userInput.trim()) return;
