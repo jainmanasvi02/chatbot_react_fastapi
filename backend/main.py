@@ -21,7 +21,7 @@ app = FastAPI()
 # Temporarily allowing all origins for development, above origin is not working
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://localhost:3000", "https://frontend-eight-black-76.vercel.app"],
+    allow_origins=["https://localhost:3000", "https://frontend-3eqpx57vx-manasvi-jains-projects.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
