@@ -3,7 +3,7 @@ import { logErrorToServer } from "./logger";
 
 const instance = axios.create({
   //baseURL: 'http://127.0.0.1:8000', 
-  baseURL: import.meta.env.auth_url, 
+  baseURL: import.meta.env.VITE_AUTH_URL, 
 });
 
 instance.interceptors.response.use(
