@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import axios from './api';
+//import axios from './api';
+import axios from './apiauth';
+
 import { useNavigate } from 'react-router-dom';
 
 
@@ -107,5 +109,6 @@ const styles = {
     fontSize: '16px'
   }
 };
+
 
 export default Signup;

@@ -90,5 +90,34 @@ async def global_exception_handler(request: Request, exc: Exception):
         content={"detail": "Internal server error. Please try again later."}
     )
 
+# GET CHAT HISTORY
+@app.get("/history/{email}")
+async def get_history(email: str, db: AsyncSession = Depends(get_db)):
+    user = await crud.get_user_by_username(db, email)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    result = await db.execute(
+        select(models.UserMessage).where(models.UserMessage.user_id == user.id)
+    )
+    user_messages = result.scalars().all()
+
+    result = await db.execute(
+        select(models.BotResponse).where(models.BotResponse.user_id == user.id)
+    )
+    bot_messages = result.scalars().all()
+
+    return {
+        "user_messages": [msg.content for msg in user_messages],
+        "bot_responses": [msg.content for msg in bot_messages]
+    }
+
+
+@app.post("/log")
+async def log_error(log: dict):
+    logger.error(f"Client error: {log}")
+    return {"message": "Logged"}
+
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
