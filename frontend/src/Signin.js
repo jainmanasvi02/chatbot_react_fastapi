@@ -6,7 +6,7 @@ function Signin() {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
 
-  const handleSignin = async (e) => {
+  /*const handleSignin = async (e) => {
     e.preventDefault();  // To prevent the page from reloading 
     try {
       const res = await axios.post('/signin', formData);
@@ -19,8 +19,24 @@ function Signin() {
       console.error("Signin error:", error);
       alert('Invalid credentials');
     }
-  };
+  };*/
 
+
+  const handleSignin = async (e) => {
+    e.preventDefault(); 
+    try {
+      const res = await axios.post('/signin', formData);
+      localStorage.setItem('token', res.data.access_token);
+      localStorage.setItem('email', formData.email);  // store from form since it's not in response
+      alert('Signin successful!');
+      console.log("Navigating to /chat...");
+      navigate('/chat');
+    } catch (error) {
+      console.error("Signin error:", error);
+      alert('Invalid credentials');
+    }
+  };
+  
   return (
     <div style={styles.body}>
       <div style={styles.container}>
