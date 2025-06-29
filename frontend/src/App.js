@@ -28,7 +28,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} /> {/* ← New Main page route */}
           <Route path="/signup" element={<Signup />} />
-          <Route path="/signin" element={<Signin />} />
+          <Route path="/signin" element={<Signin setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/chat" element={isLoggedIn ? <Chat /> : <Navigate to="/signin" />} />
         </Routes>
       </Router>
