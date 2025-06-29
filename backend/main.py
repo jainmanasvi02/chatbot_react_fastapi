@@ -13,6 +13,8 @@ import traceback
 
 app = FastAPI()
 
+#forcing redploy
+
 #origins = ["https://localhost:3000", https://frontend-eight-black-76.vercel.app]
 # Temporarily allowing all origins for development, above origin is not working
 app.add_middleware(
