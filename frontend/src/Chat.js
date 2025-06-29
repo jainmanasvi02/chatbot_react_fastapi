@@ -34,7 +34,7 @@ export default function Chat() {
   const sendMessage = async () => {
     if (!userInput.trim()) return;
 
-    const username = localStorage.getItem('email');
+    const email = localStorage.getItem('email');
     const token = localStorage.getItem('token');
     const userMessage = { sender: 'user', text: userInput };
     setChatHistory(prev => [...prev, userMessage]);
