@@ -28,6 +28,7 @@ function Signin() {
       const res = await axios.post('/signin', formData);
       localStorage.setItem('token', res.data.access_token);
       localStorage.setItem('email', formData.email);  // store from form since it's not in response
+      setIsLoggedIn(true); 
       alert('Signin successful!');
       console.log("Navigating to /chat...");
       navigate('/chat');
