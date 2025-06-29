@@ -6,7 +6,8 @@ from dotenv import load_dotenv
 #from sqlalchemy import Column, Integer, String
 #from .database import Base
 
-load_dotenv()
+#load_dotenv()
+load_dotenv(dotenv_path="../.env")
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
