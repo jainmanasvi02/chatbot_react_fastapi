@@ -13,11 +13,11 @@ import traceback
 
 app = FastAPI()
 
-origins = ["https://localhost:3000"]
+#origins = ["https://localhost:3000", https://frontend-eight-black-76.vercel.app]
 # Temporarily allowing all origins for development, above origin is not working
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://frontend-eight-black-76.vercel.app","*"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
