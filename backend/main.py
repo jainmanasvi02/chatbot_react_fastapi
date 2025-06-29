@@ -7,7 +7,8 @@ import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.future import select
 from fastapi.responses import JSONResponse
-from backend.logger import logger
+#from backend.logger import logger
+from logger import logger
 import traceback
 
 app = FastAPI()
