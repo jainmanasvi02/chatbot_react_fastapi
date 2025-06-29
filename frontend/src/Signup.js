@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Signup() {
-  const [formData, setFormData] = useState({ username: '', password: '' });
+  const [formData, setFormData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
@@ -27,7 +27,7 @@ function Signup() {
         <h2 style={styles.heading}>SignUp</h2>
         <form onSubmit={handleSignup}>
           <div style={styles.inputGroup}>
-            <label htmlFor="username" style={styles.label}>Email ID:</label>
+            <label htmlFor="email" style={styles.label}>Email ID:</label>
             <input
               type="text"
               id="email id"
