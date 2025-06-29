@@ -2,7 +2,8 @@ import axios from 'axios';
 import { logErrorToServer } from "./logger";
 
 const instance = axios.create({
-  baseURL: 'http://127.0.0.1:8000', 
+  //baseURL: 'http://127.0.0.1:8000', 
+  baseURL: import.meta.env.auth_url, 
 });
 
 instance.interceptors.response.use(
