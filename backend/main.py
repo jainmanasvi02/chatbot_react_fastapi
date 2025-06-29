@@ -10,6 +10,8 @@ from fastapi.responses import JSONResponse
 #from backend.logger import logger
 from logger import logger
 import traceback
+from pydantic import BaseModel, EmailStr
+
 
 app = FastAPI()
 
@@ -19,12 +21,16 @@ app = FastAPI()
 # Temporarily allowing all origins for development, above origin is not working
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://localhost:3000", "https://frontend-eight-black-76.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+class ChatRequest(BaseModel):
+    email: EmailStr
+    content: str
+    
 # Creating tables
 @app.on_event("startup")
 async def startup():
@@ -39,12 +45,12 @@ async def get_db():
 # CHAT ENDPOINT
 @app.post("/chat", response_model=schemas.MessageResponse)
 async def chat(message: schemas.MessageCreate, db: AsyncSession = Depends(get_db)):
-    user = await crud.get_user_by_username(db, message.username)
+    user = await crud.get_user_by_email(db, message.email)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
 
     # Save user message
-    user_msg = await crud.create_user_message(db, user.username, message.content)
+    user_msg = await crud.create_user_message(db, user.email, message.content)
    
 
     # Get bot response
@@ -62,7 +68,7 @@ async def chat(message: schemas.MessageCreate, db: AsyncSession = Depends(get_db
 # SIGNUP
 @app.post("/signup")
 async def signup(user: schemas.UserCreate, db: AsyncSession = Depends(get_db)):
-    db_user = await crud.get_user_by_username(db, user.username)
+    db_user = await crud.get_user_by_email(db, user.email)
     if db_user:
         raise HTTPException(status_code=400, detail="Username already registered")
     await crud.create_user(db, user)
@@ -71,14 +77,14 @@ async def signup(user: schemas.UserCreate, db: AsyncSession = Depends(get_db)):
 # SIGNIN
 @app.post("/signin")
 async def signin(user: schemas.UserLogin, db: AsyncSession = Depends(get_db)):
-    db_user = await crud.get_user_by_username(db, user.username)
+    db_user = await crud.get_user_by_email(db, user.email)
     print(f"db_user: {db_user}")
     print("entered password:", user.password)
     if not db_user or db_user.password != user.password:
         print("Login failed")
         raise HTTPException(status_code=401, detail="Invalid credentials")
     print("Login successfull")
-    return {"message": "Login successful", "username": db_user.username}
+    return {"message": "Login successful", "username": db_user.email}
 
 
 @app.exception_handler(Exception)
@@ -90,10 +96,11 @@ async def global_exception_handler(request: Request, exc: Exception):
         content={"detail": "Internal server error. Please try again later."}
     )
 
+
 # GET CHAT HISTORY
 @app.get("/history/{email}")
 async def get_history(email: str, db: AsyncSession = Depends(get_db)):
-    user = await crud.get_user_by_username(db, email)
+    user = await crud.get_user_by_email(db, email)
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
 
@@ -114,9 +121,9 @@ async def get_history(email: str, db: AsyncSession = Depends(get_db)):
 
 
 @app.post("/log")
-async def log_error(log: dict):
-    logger.error(f"Client error: {log}")
-    return {"message": "Logged"}
+def receive_log(data: dict):
+    print("Frontend log:", data)
+    return {"status": "received"}
 
 
 if __name__ == "__main__":

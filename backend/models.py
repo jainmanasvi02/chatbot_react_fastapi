@@ -44,6 +44,6 @@ class User(Base):
     __tablename__ = "users"  # Your table name
 
     id = Column(Integer, primary_key=True, index=True)
-    username = Column(String, unique=True, index=True)
+    email = Column(String, unique=True, index=True)
     password = Column(String)
     messages = relationship("UserMessage", back_populates="user")

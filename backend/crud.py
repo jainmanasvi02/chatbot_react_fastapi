@@ -10,8 +10,8 @@ from sqlalchemy.future import select
 #    await db.refresh(message)
 #    return message
 
-async def create_user_message(db: AsyncSession, username: str, content: str):
-    user = await get_user_by_username(db, username)
+async def create_user_message(db: AsyncSession, email: str, content: str):
+    user = await get_user_by_email(db, email)
     if user:
         msg = models.UserMessage(content=content, user_id=user.id)
         db.add(msg)
@@ -27,12 +27,12 @@ async def create_bot_response(db: AsyncSession, content: str, user_message_id: i
     return response
 
 async def create_user(db: AsyncSession, user: schemas.UserCreate):
-    new_user = models.User(username=user.username, password=user.password)
+    new_user = models.User(email=user.email, password=user.password)
     db.add(new_user)
     await db.commit()
     await db.refresh(new_user)
     return new_user
 
-async def get_user_by_username(db: AsyncSession, username: str):
-    result = await db.execute(select(models.User).where(models.User.username == username))
+async def get_user_by_email(db: AsyncSession, email: str):
+    result = await db.execute(select(models.User).where(models.User.email == email))
     return result.scalars().first()

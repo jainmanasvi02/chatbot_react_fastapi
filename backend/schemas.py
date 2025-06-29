@@ -14,7 +14,7 @@ from datetime import datetime
 #        orm_mode = True
 
 class MessageCreate(BaseModel):
-    username: str
+    email: str
     content: str
 
 class MessageResponse(BaseModel):
@@ -22,16 +22,16 @@ class MessageResponse(BaseModel):
     bot_response: str
 
 class UserCreate(BaseModel):
-    username: str
+    email: str
     password: str
 
 class UserLogin(BaseModel):
-    username: str
+    email: str
     password: str
 
 class UserOut(BaseModel):
     id: int
-    username: str
+    email: str
 
     class Config:
         orm_mode = True
