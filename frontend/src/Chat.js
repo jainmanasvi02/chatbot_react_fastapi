@@ -13,14 +13,14 @@ export default function Chat() {
 
   useEffect(() => {   
     const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
-    if (!token || !username) {
+    const username = localStorage.getItem('email');
+    if (!token || !email) {
       navigate('/signin');
       return;
     }
 
     // get chat history
-    axios.get(`/history/${username}`)
+    axios.get(`/history/${email}`)
       .then(res => {
         const history = res.data.map(msg => ({
           sender: 'user',
@@ -34,7 +34,7 @@ export default function Chat() {
   const sendMessage = async () => {
     if (!userInput.trim()) return;
 
-    const username = localStorage.getItem('username');
+    const username = localStorage.getItem('email');
     const token = localStorage.getItem('token');
     const userMessage = { sender: 'user', text: userInput };
     setChatHistory(prev => [...prev, userMessage]);
@@ -42,7 +42,7 @@ export default function Chat() {
     try {
       const response = await axios.post(
         '/chat',
-        { content: userInput, username },
+        { content: userInput, email },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -67,7 +67,7 @@ export default function Chat() {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('username');
+    localStorage.removeItem('email');
     navigate('/signin');
   };
 
