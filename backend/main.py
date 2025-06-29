@@ -1,7 +1,8 @@
 from fastapi import FastAPI, Depends, HTTPException, Request
 from sqlalchemy.ext.asyncio import AsyncSession
-from .database import SessionLocal, engine, Base
-from . import models, schemas, crud, llm_provider
+from database import SessionLocal, engine, Base
+#from . import models, schemas, crud, llm_provider
+import models, schemas, crud, llm_provider
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.future import select

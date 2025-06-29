@@ -14,7 +14,8 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from .database import Base
+#from .database import Base
+from database import Base
 
 class UserMessage(Base):
     __tablename__ = "user_messages"
