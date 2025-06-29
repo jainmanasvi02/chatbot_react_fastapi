@@ -13,7 +13,7 @@ export default function Chat() {
 
   useEffect(() => {   
     const token = localStorage.getItem('token');
-    const username = localStorage.getItem('email');
+    const email = localStorage.getItem('email');
     if (!token || !email) {
       navigate('/signin');
       return;
