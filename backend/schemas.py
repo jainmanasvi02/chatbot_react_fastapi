@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel,EmailStr
 from datetime import datetime
 
 #class MessageCreate(BaseModel):
@@ -22,16 +22,16 @@ class MessageResponse(BaseModel):
     bot_response: str
 
 class UserCreate(BaseModel):
-    email: str
+    email: EmailStr
     password: str
 
 class UserLogin(BaseModel):
-    email: str
+    email: EmailStr
     password: str
 
 class UserOut(BaseModel):
     id: int
-    email: str
+    email: EmailStr
 
     class Config:
         orm_mode = True

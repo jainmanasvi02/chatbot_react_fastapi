@@ -27,12 +27,19 @@ export default function Chat() {
     // get chat history
     axios.get(`/history/${email}`)
       .then(res => {
-        const history = res.data.map(msg => ({
-          sender: 'user',
-          text: msg
-        }));
+        const userMsgs = res.data.user_messages || [];
+        const botMsgs = res.data.bot_responses || [];
+
+        const history = [];
+
+        for (let i = 0; i < Math.max(userMsgs.length, botMsgs.length); i++) {
+          if (userMsgs[i]) history.push({ sender: 'user', text: userMsgs[i] });
+          if (botMsgs[i]) history.push({ sender: 'bot', text: botMsgs[i] });
+        }
+
         setChatHistory(history);
       })
+
       .catch(err => console.error('Error fetching history:', err))
       .finally(() => setLoading(false));
   }, [navigate]);
