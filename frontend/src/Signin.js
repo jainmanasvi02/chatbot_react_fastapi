@@ -3,7 +3,7 @@ import axios from './api';
 import { useNavigate } from 'react-router-dom';
 
 function Signin() {
-  const [formData, setFormData] = useState({ username: '', password: '' });
+  const [formData, setFormData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
 
   const handleSignin = async (e) => {
@@ -11,7 +11,7 @@ function Signin() {
     try {
       const res = await axios.post('/signin', formData);
       localStorage.setItem('token', 'dummy_token');
-      localStorage.setItem('username', res.data.username); 
+      localStorage.setItem('email', res.data.email); 
       alert('Signin successful!');
       console.log("Navigating to /chat...");
       navigate('/chat');
@@ -27,14 +27,14 @@ function Signin() {
         <h2 style={styles.heading}>SignIn</h2>
         <form onSubmit={handleSignin}>
           <div style={styles.inputGroup}>
-            <label htmlFor="username" style={styles.label}>Email ID:</label>
+            <label htmlFor="email" style={styles.label}>Email ID:</label>
             <input
               type="text"
               id="email id"
               name="email id"
               required
-              value={formData.username}
-              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               style={styles.input}
             />
           </div>

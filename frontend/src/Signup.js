@@ -33,8 +33,8 @@ function Signup() {
               id="email id"
               name="email id"
               required
-              value={formData.username}
-              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               style={styles.input}
             />
           </div>
@@ -107,6 +107,5 @@ const styles = {
     fontSize: '16px'
   }
 };
-
 
 export default Signup;
