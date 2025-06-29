@@ -7,6 +7,7 @@ import ReactMarkdown from 'react-markdown';
 
 
 export default function Chat() {
+  console.log("Chat rendered");
   const [userInput, setUserInput] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
   const navigate = useNavigate();

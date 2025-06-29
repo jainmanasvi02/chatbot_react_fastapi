@@ -8,7 +8,18 @@ import Main from './Main';
 import ErrorBoundary from "./ErrorBoundary";
 
 function App() {
-  const isLoggedIn = localStorage.getItem('token');
+  //const isLoggedIn = localStorage.getItem('token');
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
+
+  // When token changes, re-evaluate login status
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setIsLoggedIn(!!localStorage.getItem('token'));
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
 
   return (
     <ErrorBoundary>
