@@ -5,3 +5,5 @@ asyncpg
 psycopg2-binary
 python-dotenv
 httpx  # Beacuse I am using an external LLM like Gemini
+email-validator
+
