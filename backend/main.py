@@ -17,7 +17,7 @@ origins = ["https://localhost:3000"]
 # Temporarily allowing all origins for development, above origin is not working
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://frontend-eight-black-76.vercel.app","*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
