@@ -13,7 +13,7 @@ instance.interceptors.response.use(
   response => response,
   error => {
     logErrorToServer(error, "Axios response error");
-    log.console("api backend error-api.js");
+    console.log("api backend error-api.js");
     return Promise.reject(error);
   }
 );
