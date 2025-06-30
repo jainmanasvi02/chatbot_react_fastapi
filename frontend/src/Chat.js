@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'; //react inbuilt function to call hooks(typewriter function in my code)
 import { useNavigate } from 'react-router-dom';
+//import axios from './api';
 import axios from './api';
 import './App.css';
 import useTypewriter from './hooks/useTypewriter'; //the typewriter function we saved inside hooks folder
@@ -12,7 +13,7 @@ export default function Chat() {
   const [chatHistory, setChatHistory] = useState([]);
   const navigate = useNavigate();
 
-  const [loading, setLoading] = useState(true);
+  //const [loading, setLoading] = useState(true);
 
   useEffect(() => {   
     const token = localStorage.getItem('token');
@@ -24,12 +25,15 @@ export default function Chat() {
       return;
     }
 
-    // get chat history
-    axios.get(`/history/${email}`)
+    //get chat history
+    /*axios.get(`/history/${email}`)
       .then(res => {
-        const userMsgs = res.data.user_messages || [];
-        const botMsgs = res.data.bot_responses || [];
-
+        //const userMsgs = res.data.user_messages || [];
+        //const botMsgs = res.data.bot_responses || [];
+        const history = res.data.map(msg => ({
+          sender: 'user',
+          text: msg
+        }));
         const history = [];
 
         for (let i = 0; i < Math.max(userMsgs.length, botMsgs.length); i++) {
@@ -41,23 +45,27 @@ export default function Chat() {
       })
 
       .catch(err => console.error('Error fetching history:', err))
-      .finally(() => setLoading(false));
+      //.finally(() => setLoading(false));*/
   }, [navigate]);
 
-  if (loading) return <div>Loading chat...</div>;
+  //if (loading) return <div>Loading chat...</div>;
 
   const sendMessage = async () => {
     if (!userInput.trim()) return;
 
     const email = localStorage.getItem('email');
     const token = localStorage.getItem('token');
+
+    console.log("EMAIL:", email); 
+
     const userMessage = { sender: 'user', text: userInput };
     setChatHistory(prev => [...prev, userMessage]);
 
     try {
-      const response = await axios.post(
-        '/chat',
-        { content: userInput, email },
+
+      const response = await axios.post('http://localhost:8000/chat',
+        //'/chat',
+        { content: userInput, email},
         {
           headers: {
             Authorization: `Bearer ${token}`,

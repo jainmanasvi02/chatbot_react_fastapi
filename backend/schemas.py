@@ -1,5 +1,6 @@
 from pydantic import BaseModel,EmailStr
-from datetime import datetime
+
+#from datetime import datetime
 
 #class MessageCreate(BaseModel):
 #    content: str
@@ -14,7 +15,7 @@ from datetime import datetime
 #        orm_mode = True
 
 class MessageCreate(BaseModel):
-    email: str
+    email: EmailStr
     content: str
 
 class MessageResponse(BaseModel):

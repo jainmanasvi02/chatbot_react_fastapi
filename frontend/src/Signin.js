@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
-//import axios from './api';
-import axios from './api_auth';
+import axios from './api';
+//import axios from './api_auth';
 import { useNavigate } from 'react-router-dom';
 
-function Signin({ setIsLoggedIn }) 
+function Signin() 
   {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
 
-  /*const handleSignin = async (e) => {
+  const handleSignin = async (e) => {
     e.preventDefault();  // To prevent the page from reloading 
     try {
+      console.log("form data" , formData)
       const res = await axios.post('/signin', formData);
       localStorage.setItem('token', 'dummy_token');
-      localStorage.setItem('email', res.data.email); 
+      // console.log("email" , res.data.email)
+      localStorage.setItem('email', res.data.username);
+
       alert('Signin successful!');
       console.log("Navigating to /chat...");
       navigate('/chat');
@@ -21,9 +24,9 @@ function Signin({ setIsLoggedIn })
       console.error("Signin error:", error);
       alert('Invalid credentials');
     }
-  };*/
+  };
 
-
+/*
   const handleSignin = async (e) => {
     e.preventDefault(); 
     try {
@@ -38,7 +41,7 @@ function Signin({ setIsLoggedIn })
       console.error("Signin error:", error);
       alert('Invalid credentials');
     }
-  };
+  };*/
   
   return (
     <div style={styles.body}>

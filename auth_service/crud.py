@@ -1,5 +1,5 @@
-from models import User
-from util import hash_password, verify_password
+from .models import User
+from .util import hash_password, verify_password
 from sqlalchemy.future import select
 
 async def create_user(db, email: str, password: str):

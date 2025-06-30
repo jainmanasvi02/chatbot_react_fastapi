@@ -1,5 +1,5 @@
 from sqlalchemy.ext.asyncio import create_async_engine
-from models import Base  
+from .models import Base  
 import asyncio
 
 #DATABASE_URL = "postgresql+asyncpg://postgres:sylus@localhost:5433/chatbot_db"

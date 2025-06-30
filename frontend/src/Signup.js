@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-//import axios from './api';
-import axios from './api_auth';
+import axios from './api';
+//import axios from './api_auth';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -11,14 +11,28 @@ function Signup() {
 
   const handleSignup = async (e) => {
     e.preventDefault()
-    console.log("Form Data:", formData); 
+    //console.log("Form Data:", formData); 
 
-    try {
+    /*try {
       await axios.post('/signup', formData);
       alert('Signup successful! Please login.');
       navigate('/signin'); 
     } catch (error) {
       console.error("Signup error:", error); 
+      alert(error.response?.data?.detail || 'Signup failed');
+    }*/
+
+
+    try {
+      //const res = await axios.post('/signup', formData);
+      await axios.post('/signup', formData);
+      //localStorage.setItem('token', 'dummy_token');
+      //localStorage.setItem('email', res.data.email); 
+      alert('Signup successful!');
+      console.log("Navigating to /signin...");
+      navigate('/signin');
+    } catch (error) {
+      console.error("Signin error:", error);
       alert(error.response?.data?.detail || 'Signup failed');
     }
   };

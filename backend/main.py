@@ -1,14 +1,14 @@
 from fastapi import FastAPI, Depends, HTTPException, Request
 from sqlalchemy.ext.asyncio import AsyncSession
-from database import SessionLocal, engine, Base
-#from . import models, schemas, crud, llm_provider
-import models, schemas, crud, llm_provider
+from .database import SessionLocal, engine, Base
+from . import models, schemas, crud, llm_provider
+#import models, schemas, crud, llm_provider
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.future import select
 from fastapi.responses import JSONResponse
-#from backend.logger import logger
-from logger import logger
+from backend.logger import logger
+#from logger import logger
 import traceback
 from pydantic import BaseModel, EmailStr
 
@@ -98,7 +98,7 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 
 # GET CHAT HISTORY
-@app.get("/history/{email}")
+'''@app.get("/history/{email}")
 async def get_history(email: str, db: AsyncSession = Depends(get_db)):
     user = await crud.get_user_by_email(db, email)
     if not user:
@@ -118,7 +118,7 @@ async def get_history(email: str, db: AsyncSession = Depends(get_db)):
         "user_messages": [msg.content for msg in user_messages],
         "bot_responses": [msg.content for msg in bot_messages]
     }
-
+'''
 
 @app.post("/log")
 def receive_log(data: dict):
